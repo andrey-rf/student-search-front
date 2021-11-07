@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: Mohave, -apple-system, sans-serif;
   }
 
+  main {
+    min-height: 100vh;
+  }
+
   a {
     color: inherit;
     text-decoration: none;

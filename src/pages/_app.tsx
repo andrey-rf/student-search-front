@@ -12,7 +12,6 @@ const App: NextPage<AppProps> = props => {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <title>Gerenciamento de Alunos</title>
       </Head>
 
       <Provider>
