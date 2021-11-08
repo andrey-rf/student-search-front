@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
   main {
     min-height: 100vh;
+    max-width: 1920px;
   }
 
   a {
