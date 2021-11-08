@@ -24,5 +24,10 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".next", "public"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "public",
+    "src/graphql/types/generated.ts"
+  ]
 }
