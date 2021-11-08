@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const LIST_STUDENTS = gql`
+const LIST_STUDENTS = gql`
   query allStudents {
     listStudents {
       name
@@ -9,3 +9,13 @@ export const LIST_STUDENTS = gql`
     }
   }
 `;
+
+const ADD_STUDENT = gql`
+  mutation AddStudent($name: String!, $cpf: String!, $email: String!) {
+    addStudent(name: $name, cpf: $cpf, email: $email) {
+      name
+    }
+  }
+`;
+
+export { LIST_STUDENTS, ADD_STUDENT };

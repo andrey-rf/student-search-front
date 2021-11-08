@@ -1,10 +1,13 @@
 import { Button } from 'reakit/Button';
 import styled from 'styled-components';
 
-const BaseButton = styled(Button)`
+import { ButtonProps } from './types';
+
+const BaseButton = styled(Button)<ButtonProps>`
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 600;
+  align-self: ${props => props.alignSelf || 'normal'};
 `;
 
 const PrimaryButton = styled(BaseButton)`
