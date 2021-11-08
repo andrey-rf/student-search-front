@@ -33,7 +33,7 @@ module.exports = {
     'no-nested-ternary': 'error',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-empty-interface': 'warn',
     '@typescript-eslint/no-use-before-define': [
       'error',
@@ -48,6 +48,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
+    'react/display-name': 'off',
 
     'import/prefer-default-export': 'off',
     'import/extensions': [
