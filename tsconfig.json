@@ -19,7 +19,8 @@
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
-      "@libs/*": ["libs/*"]
+      "@libs/*": ["libs/*"],
+      "@graphql/*": ["graphql/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

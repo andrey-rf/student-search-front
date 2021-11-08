@@ -31,6 +31,8 @@ module.exports = {
     'no-mixed-operators': 'error',
     'no-unneeded-ternary': 'error',
     'no-nested-ternary': 'error',
+    'no-underscore-dangle': 'off',
+    'no-param-reassign': 'warn',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-explicit-any': 'warn',
