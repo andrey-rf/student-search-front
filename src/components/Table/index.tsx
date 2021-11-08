@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useTable, Column } from 'react-table';
+import { useTable } from 'react-table';
 
 import {
   TableContainer,
@@ -10,62 +10,12 @@ import {
   TableCell,
   TableRow,
 } from './styles';
+import type { TableProps } from './types';
 
-interface Students {
-  name: string;
-  cpf: string;
-  email: string;
-}
+function Table({ tableColumns, tableData }: TableProps) {
+  const columns = useMemo(() => tableColumns, [tableColumns]);
 
-function Table() {
-  const data = useMemo(
-    () => [
-      {
-        name: 'André Ribeiro',
-        cpf: '79506315035',
-        email: 'andrezito@gmail.com',
-      },
-      {
-        name: 'Mateus Vilasboas',
-        cpf: '37227280020',
-        email: 'aow@gmail.com',
-      },
-      {
-        name: 'Ícaro Assis',
-        cpf: '86259109040',
-        email: 'icaroaf@gmail.com',
-      },
-      {
-        name: 'Lucas Gabriel',
-        cpf: '28011705008',
-        email: 'xexa@gmail.com',
-      },
-      {
-        name: 'Matheus Amaral',
-        cpf: '45812640068',
-        email: 'maral@gmail.com',
-      },
-    ],
-    [],
-  );
-
-  const columns: Array<Column<Students>> = useMemo(
-    () => [
-      {
-        Header: 'Nome',
-        accessor: 'name',
-      },
-      {
-        Header: 'CPF',
-        accessor: 'cpf',
-      },
-      {
-        Header: 'Email',
-        accessor: 'email',
-      },
-    ],
-    [],
-  );
+  const data = useMemo(() => tableData, [tableData]);
 
   const tableInstance = useTable({ columns, data });
 

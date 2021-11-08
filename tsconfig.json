@@ -20,7 +20,8 @@
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
       "@libs/*": ["libs/*"],
-      "@graphql/*": ["graphql/*"]
+      "@graphql/*": ["graphql/*"],
+      "@constants/*": ["constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
