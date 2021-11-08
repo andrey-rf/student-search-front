@@ -1,7 +1,7 @@
 import { Input as RawInput } from 'reakit/Input';
 import styled from 'styled-components';
 
-import { Box } from '@components/Box';
+import { PrimaryButton } from '@components/Button';
 
 const Form = styled.form`
   display: flex;
@@ -10,7 +10,7 @@ const Form = styled.form`
   gap: 1rem;
 `;
 
-const ButtonBox = styled(Box)`
+const SaveButton = styled(PrimaryButton)`
   align-self: flex-end;
 `;
 
@@ -20,4 +20,4 @@ const Input = styled(RawInput)`
   border: 1px solid ${props => props.theme.colors.gray.primary};
 `;
 
-export { Form, ButtonBox, Input };
+export { Form, SaveButton, Input };

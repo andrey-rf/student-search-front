@@ -12,6 +12,7 @@ interface FlexBoxProps {
   direction?: Direction;
   align?: Align;
   justify?: Justify;
+  gap?: number;
 }
 
 export type { FlexBoxProps };

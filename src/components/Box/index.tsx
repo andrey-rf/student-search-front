@@ -12,6 +12,7 @@ const FlexBox = styled(Box)<FlexBoxProps>`
   flex-direction: ${props => props.direction || 'row'};
   align-items: ${props => props.align || 'flex-start'};
   justify-content: ${props => props.justify || 'flex-start'};
+  gap: ${props => `${props.gap}rem` || '0'};
 `;
 
 export { Box, FlexBox };

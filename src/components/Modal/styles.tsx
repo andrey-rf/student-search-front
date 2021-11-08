@@ -1,11 +1,7 @@
 import { Button } from 'reakit/Button';
-import {
-  Dialog as RawDialog,
-  DialogBackdrop as RawDialogBackdrop,
-} from 'reakit/Dialog';
 import styled from 'styled-components';
 
-const DialogBackdrop = styled(RawDialogBackdrop)`
+const DialogBackdrop = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -16,7 +12,7 @@ const DialogBackdrop = styled(RawDialogBackdrop)`
   align-items: center;
 `;
 
-const Dialog = styled(RawDialog)`
+const Dialog = styled.div`
   margin: auto;
   background-color: white;
   padding: 2rem;

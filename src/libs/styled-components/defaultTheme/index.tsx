@@ -23,6 +23,10 @@ const theme: DefaultThemeType = {
     gray: {
       primary: '#DDDDDD',
     },
+    red: {
+      primary: '#FF1E1E',
+      secondary: '#FF6464',
+    },
   },
 };
 

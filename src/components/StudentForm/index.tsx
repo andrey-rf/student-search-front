@@ -1,25 +1,31 @@
+import { memo } from 'react';
+
 import { useForm } from 'react-hook-form';
 
-import { PrimaryButton } from '@components/Button';
-
-import { Form, ButtonBox, Input } from './styles';
+import { Form, SaveButton, Input } from './styles';
 import type { FormProps, FormData } from './types';
 
-function StudentForm({ onSubmit }: FormProps) {
+function StudentForm({ onSubmit, value }: FormProps) {
   const { register, handleSubmit } = useForm<FormData>();
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Adicionar Aluno</h2>
-      <Input placeholder="Nome" {...register('name')} />
-      <Input placeholder="CPF" {...register('cpf')} />
-      <Input placeholder="Email" {...register('email')} />
+      <h2>{value ? 'Editar Aluno' : 'Adicionar Aluno'}</h2>
+      <Input
+        defaultValue={value?.name}
+        placeholder="Nome"
+        {...register('name')}
+      />
+      <Input defaultValue={value?.cpf} placeholder="CPF" {...register('cpf')} />
+      <Input
+        defaultValue={value?.email}
+        placeholder="Email"
+        {...register('email')}
+      />
 
-      <ButtonBox>
-        <PrimaryButton type="submit">Salvar</PrimaryButton>
-      </ButtonBox>
+      <SaveButton type="submit">Salvar</SaveButton>
     </Form>
   );
 }
 
-export default StudentForm;
+export default memo(StudentForm);

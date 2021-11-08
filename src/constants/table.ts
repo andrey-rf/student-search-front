@@ -1,8 +1,6 @@
 import { Column } from 'react-table';
 
-import { Student } from '@graphql/types/generated';
-
-const COLUMNS: Array<Column<Student>> = [
+const COLUMNS: Array<Column<any>> = [
   {
     Header: 'Nome',
     accessor: 'name',

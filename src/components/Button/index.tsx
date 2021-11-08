@@ -23,4 +23,9 @@ const SecondaryButton = styled(BaseButton)`
   color: ${props => props.theme.colors.green.primary};
 `;
 
-export { PrimaryButton, SecondaryButton };
+const DangerButton = styled(BaseButton)`
+  border: 1px solid ${props => props.theme.colors.red.primary};
+  color: ${props => props.theme.colors.red.primary};
+`;
+
+export { PrimaryButton, SecondaryButton, DangerButton };

@@ -1,10 +1,7 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+import { Dispatch, ReactNode } from 'react';
 
 interface ModalProps {
-  disclosure: DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >;
+  setModalOpen: Dispatch<boolean>;
   children?: ReactNode;
 }
 

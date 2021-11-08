@@ -18,4 +18,20 @@ const ADD_STUDENT = gql`
   }
 `;
 
-export { LIST_STUDENTS, ADD_STUDENT };
+const UPDATE_STUDENT = gql`
+  mutation UpdateStudent($name: String!, $cpf: String!, $email: String!) {
+    updateStudent(cpf: $cpf, name: $name, email: $email) {
+      name
+      email
+      cpf
+    }
+  }
+`;
+
+const DELETE_STUDENT = gql`
+  mutation DeleteStudent($cpf: String!) {
+    deleteStudent(cpf: $cpf)
+  }
+`;
+
+export { LIST_STUDENTS, ADD_STUDENT, UPDATE_STUDENT, DELETE_STUDENT };
