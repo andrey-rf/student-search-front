@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { Column } from 'react-table';
 
 import { COLUMNS } from '@constants/table';
@@ -12,18 +12,25 @@ import {
   SecondaryButton,
 } from '@components/Button';
 import Modal from '@components/Modal';
+import Search from '@components/SearchBar';
 import StudentForm from '@components/StudentForm';
 import { FormData } from '@components/StudentForm/types';
 import Table from '@components/Table';
-import { TableColumnValues } from '@components/Table/types';
 
-import { ADD_STUDENT, DELETE_STUDENT, UPDATE_STUDENT } from '@graphql/students';
+import { useDebounce } from '@hooks/useDebounce';
+
+import {
+  ADD_STUDENT,
+  DELETE_STUDENT,
+  LIST_STUDENTS,
+  UPDATE_STUDENT,
+} from '@graphql/students';
 import {
   MutationAddStudentArgs,
   MutationUpdateStudentArgs,
-  useAllStudentsQuery,
   Student,
   MutationDeleteStudentArgs,
+  useAllStudentsLazyQuery,
 } from '@graphql/types/generated';
 
 function Main() {
@@ -31,8 +38,11 @@ function Main() {
   const [updateDialogOpen, setUpdateDialogOpen] = useState<boolean>(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
+  const [searchValue, setSearchValue] = useState<string>('');
 
-  const { loading, data: queryData, error } = useAllStudentsQuery();
+  const [getStudents, { loading, data: queryData, error }] =
+    useLazyQuery(LIST_STUDENTS);
+  const searchStudents = useDebounce(getStudents);
 
   const [addStudent, { loading: addLoading, error: addError }] = useMutation<
     Student,
@@ -75,6 +85,20 @@ function Main() {
     });
     setDeleteDialogOpen(false);
   };
+
+  const handleSearch = (value: string) => {
+    console.log('aaa');
+    setSearchValue(value);
+    searchStudents({
+      variables: {
+        text: value,
+      },
+    });
+  };
+
+  useEffect(() => {
+    getStudents();
+  }, []);
 
   const COLUMNS_WITH_ACTIONS: Array<Column<any>> = [
     ...COLUMNS,
@@ -131,6 +155,13 @@ function Main() {
 
   return (
     <FlexBox direction="column">
+      <Search
+        id="search"
+        label="Busca por nome, email ou CPF"
+        placeholder="Digite um nome, email ou CPF..."
+        value={searchValue}
+        handleChange={handleSearch}
+      />
       <PrimaryButton
         type="button"
         alignSelf="flex-end"

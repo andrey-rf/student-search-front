@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 const LIST_STUDENTS = gql`
-  query allStudents {
-    listStudents {
+  query allStudents($text: String) {
+    listStudents(text: $text) {
       name
       cpf
       email
