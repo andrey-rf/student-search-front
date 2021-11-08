@@ -20,6 +20,9 @@ const theme: DefaultThemeType = {
       primary: '#FEFF00',
       secondary: '#FAF060',
     },
+    gray: {
+      primary: '#DDDDDD',
+    },
   },
 };
 
