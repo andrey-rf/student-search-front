@@ -1,12 +1,14 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
 import { Form, SaveButton, Input } from './styles';
 import type { FormProps, FormData } from './types';
+import { formatCpf, onlyNumbers } from '@helpers/inputMask';
 
 function StudentForm({ onSubmit, value }: FormProps) {
   const { register, handleSubmit } = useForm<FormData>();
+  const [cpf, setCpf] = useState<string>(value?.cpf ?? '');
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -16,7 +18,13 @@ function StudentForm({ onSubmit, value }: FormProps) {
         placeholder="Nome"
         {...register('name')}
       />
-      <Input defaultValue={value?.cpf} placeholder="CPF" {...register('cpf')} />
+      <Input
+        defaultValue={value?.cpf}
+        placeholder="CPF"
+        value={formatCpf(cpf)}
+        {...register('cpf')}
+        onChange={e => setCpf(onlyNumbers(e.target.value))}
+      />
       <Input
         defaultValue={value?.email}
         placeholder="Email"
