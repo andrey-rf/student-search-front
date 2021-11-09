@@ -24,6 +24,7 @@ import { Student, AllStudentsQuery } from '@graphql/types/generated';
 import { TableHeaders } from '@components/Table/types';
 import { useGraphQL } from '@hooks/useGraphQL';
 import Loader from 'react-loader-spinner';
+import { onlyNumbers } from '@helpers/inputMask';
 
 function Main() {
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
@@ -57,7 +58,7 @@ function Main() {
     addStudent({
       variables: {
         name: data.name,
-        cpf: data.cpf,
+        cpf: onlyNumbers(data.cpf),
         email: data.email,
       },
     }).then(() => {
@@ -70,7 +71,7 @@ function Main() {
     updateStudent({
       variables: {
         name: data.name,
-        cpf: data.cpf,
+        cpf: onlyNumbers(data.cpf),
         email: data.email,
       },
     }).then(() => {

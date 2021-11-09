@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 
 import { Form, SaveButton, Input } from './styles';
 import type { FormProps, FormData } from './types';
-import { formatCpf, onlyNumbers } from '@helpers/inputMask';
+import { formatCpf } from '@helpers/inputMask';
 import Loader from 'react-loader-spinner';
 
 function StudentForm({ onSubmit, value, loading }: FormProps) {
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit, setValue } = useForm<FormData>();
   const [cpf, setCpf] = useState<string>(value?.cpf ?? '');
 
   return (
@@ -23,10 +23,11 @@ function StudentForm({ onSubmit, value, loading }: FormProps) {
           />
           <Input
             defaultValue={value?.cpf}
+            inputMode="numeric"
             placeholder="CPF"
             value={formatCpf(cpf)}
             {...register('cpf')}
-            onChange={e => setCpf(onlyNumbers(e.target.value))}
+            onChange={e => setCpf(e.target.value)}
           />
           <Input
             defaultValue={value?.email}
