@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { Column } from 'react-table';
 
-import { COLUMNS } from '@constants/table';
+import { COLUMNS } from '@helpers/constants';
 
 import { FlexBox } from '@components/Box';
 import {
@@ -19,20 +19,10 @@ import Table from '@components/Table';
 
 import { useDebounce } from '@hooks/useDebounce';
 
-import {
-  ADD_STUDENT,
-  DELETE_STUDENT,
-  LIST_STUDENTS,
-  UPDATE_STUDENT,
-} from '@graphql/students';
-import {
-  MutationAddStudentArgs,
-  MutationUpdateStudentArgs,
-  Student,
-  MutationDeleteStudentArgs,
-  AllStudentsQuery,
-} from '@graphql/types/generated';
+import { LIST_STUDENTS } from '@graphql/students';
+import { Student, AllStudentsQuery } from '@graphql/types/generated';
 import { TableHeaders } from '@components/Table/types';
+import { useGraphQL } from '@hooks/useGraphQL';
 
 function Main() {
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
@@ -40,70 +30,66 @@ function Main() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [studentList, setStudentList] = useState<Array<Student>>([]);
 
-  const [getStudents, { loading, data: queryData, error }] =
-    useLazyQuery(LIST_STUDENTS);
+  const { addStudentResult, updateStudentResult, deleteStudentResult } =
+    useGraphQL();
+
+  const [getStudents, { loading, error, data: queryData }] =
+    useLazyQuery<AllStudentsQuery>(LIST_STUDENTS, {
+      onCompleted: data => {
+        setStudentList(data.listStudents);
+      },
+    });
   const searchStudents = useDebounce(getStudents, 500);
 
-  const [addStudent, { loading: addLoading, error: addError }] = useMutation<
-    Student,
-    MutationAddStudentArgs
-  >(ADD_STUDENT, {
-    update: (cache, mutationResult) => {
-      const newStudent = mutationResult.data;
-      const data = cache.readQuery<AllStudentsQuery>({
-        query: LIST_STUDENTS,
-      });
-      cache.writeQuery({
-        query: LIST_STUDENTS,
-        data: { listStudents: [...(data?.listStudents ?? []), newStudent] },
-      });
-    },
-  });
+  const [addStudent, { loading: addLoading, error: addError }] =
+    addStudentResult;
 
   const [updateStudent, { loading: updateLoading, error: updateError }] =
-    useMutation<Student, MutationUpdateStudentArgs>(UPDATE_STUDENT, {
-      refetchQueries: [LIST_STUDENTS, 'listStudents'],
-    });
+    updateStudentResult;
 
   const [deleteStudent, { loading: deleteLoading, error: deleteError }] =
-    useMutation<Student, MutationDeleteStudentArgs>(DELETE_STUDENT, {
-      refetchQueries: [LIST_STUDENTS, 'listStudents'],
-    });
+    deleteStudentResult;
 
-  const handleAdd = (data: FormData) => {
+  const handleAdd = (data: FormData) =>
     addStudent({
       variables: {
         name: data.name,
         cpf: data.cpf,
         email: data.email,
       },
+    }).then(() => {
+      if (!addError) {
+        setAddDialogOpen(false);
+      }
     });
-    setAddDialogOpen(false);
-  };
 
-  const handleUpdate = (data: FormData) => {
+  const handleUpdate = (data: FormData) =>
     updateStudent({
       variables: {
         name: data.name,
         cpf: data.cpf,
         email: data.email,
       },
+    }).then(() => {
+      if (!updateError) {
+        setUpdateDialogOpen(false);
+      }
     });
-    setUpdateDialogOpen(false);
-  };
 
-  const handleDelete = (cpf: string) => {
+  const handleDelete = (cpf: string) =>
     deleteStudent({
       variables: {
         cpf,
       },
+    }).then(() => {
+      if (!deleteError) {
+        setDeleteDialogOpen(false);
+      }
     });
-    setDeleteDialogOpen(false);
-  };
 
   const handleSearch = (value: string) => {
-    console.log('aaa');
     setSearchValue(value);
     searchStudents({
       variables: {
@@ -115,6 +101,12 @@ function Main() {
   useEffect(() => {
     getStudents();
   }, []);
+
+  useEffect(() => {
+    if (queryData) {
+      setStudentList(queryData.listStudents);
+    }
+  }, [queryData]);
 
   const COLUMNS_WITH_ACTIONS: Array<Column<TableHeaders>> = [
     ...COLUMNS,
@@ -152,23 +144,6 @@ function Main() {
     },
   ];
 
-  const content = () => {
-    if (loading) {
-      return <span>Loading...</span>;
-    }
-    if (error || !queryData) {
-      return <span>Ocorreu um erro...</span>;
-    }
-    return (
-      queryData?.listStudents.length > 0 && (
-        <Table
-          tableColumns={COLUMNS_WITH_ACTIONS}
-          tableData={queryData?.listStudents}
-        />
-      )
-    );
-  };
-
   return (
     <FlexBox direction="column">
       <Search
@@ -185,7 +160,15 @@ function Main() {
       >
         Adicionar aluno
       </PrimaryButton>
-      {content()}
+      {loading && <span>Loading...</span>}
+      {!loading && error && <span>Ocorreu um erro...</span>}
+      {!loading &&
+        !error &&
+        (studentList.length > 0 ? (
+          <Table tableColumns={COLUMNS_WITH_ACTIONS} tableData={studentList} />
+        ) : (
+          <span>Nenhum estudante adicionado</span>
+        ))}
       {addDialogOpen && (
         <Modal setModalOpen={setAddDialogOpen}>
           <StudentForm onSubmit={handleAdd} loading={addLoading} />
@@ -195,7 +178,7 @@ function Main() {
         <Modal setModalOpen={setUpdateDialogOpen}>
           <StudentForm
             onSubmit={handleUpdate}
-            loading={addLoading}
+            loading={updateLoading}
             value={editingStudent}
           />
         </Modal>

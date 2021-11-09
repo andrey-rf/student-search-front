@@ -7,6 +7,8 @@ import { Provider } from 'reakit';
 import { createApolloClient } from '@libs/apollo-graphql/apolloClient';
 import DefaultTheme from '@libs/styled-components/defaultTheme';
 import { GlobalStyle } from '@libs/styled-components/globalStyle';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ApplicationProps extends AppProps {
   api: string;
@@ -27,6 +29,7 @@ const App: NextPage<ApplicationProps> = props => {
           <DefaultTheme>
             <GlobalStyle />
             <Component {...pageProps} />
+            <ToastContainer />
           </DefaultTheme>
         </Provider>
       </ApolloProvider>

@@ -11,7 +11,7 @@ type TableHeaders = Student & TableActionHeaders;
 
 interface TableProps {
   tableColumns: Array<Column<TableHeaders>>;
-  tableData: Array<TableHeaders>;
+  tableData: Array<Student>;
 }
 
 export type { TableProps, TableHeaders };
