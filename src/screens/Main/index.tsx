@@ -23,6 +23,7 @@ import { LIST_STUDENTS } from '@graphql/students';
 import { Student, AllStudentsQuery } from '@graphql/types/generated';
 import { TableHeaders } from '@components/Table/types';
 import { useGraphQL } from '@hooks/useGraphQL';
+import Loader from 'react-loader-spinner';
 
 function Main() {
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
@@ -186,13 +187,19 @@ function Main() {
       {deleteDialogOpen && editingStudent && (
         <Modal setModalOpen={setDeleteDialogOpen}>
           <FlexBox direction="column" gap={2}>
-            <h3>Tem certeza que deseja excluir {editingStudent.name}?</h3>
-            <DangerButton
-              alignSelf="center"
-              onClick={() => handleDelete(editingStudent.cpf)}
-            >
-              Confirmar
-            </DangerButton>
+            {!deleteLoading ? (
+              <>
+                <h3>Tem certeza que deseja excluir {editingStudent.name}?</h3>
+                <DangerButton
+                  alignSelf="center"
+                  onClick={() => handleDelete(editingStudent.cpf)}
+                >
+                  Confirmar
+                </DangerButton>
+              </>
+            ) : (
+              <Loader type="TailSpin" color="#CCC" height={40} width={40} />
+            )}
           </FlexBox>
         </Modal>
       )}
