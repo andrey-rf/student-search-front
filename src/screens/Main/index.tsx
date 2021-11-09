@@ -32,6 +32,7 @@ import {
   MutationDeleteStudentArgs,
   useAllStudentsLazyQuery,
 } from '@graphql/types/generated';
+import { TableHeaders } from '@components/Table/types';
 
 function Main() {
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
@@ -42,7 +43,7 @@ function Main() {
 
   const [getStudents, { loading, data: queryData, error }] =
     useLazyQuery(LIST_STUDENTS);
-  const searchStudents = useDebounce(getStudents);
+  const searchStudents = useDebounce(getStudents, 500);
 
   const [addStudent, { loading: addLoading, error: addError }] = useMutation<
     Student,
@@ -100,7 +101,7 @@ function Main() {
     getStudents();
   }, []);
 
-  const COLUMNS_WITH_ACTIONS: Array<Column<any>> = [
+  const COLUMNS_WITH_ACTIONS: Array<Column<TableHeaders>> = [
     ...COLUMNS,
     {
       id: 'edit',

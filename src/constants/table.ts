@@ -1,6 +1,7 @@
+import { TableHeaders } from '@components/Table/types';
 import { Column } from 'react-table';
 
-const COLUMNS: Array<Column<any>> = [
+const COLUMNS: Array<Column<TableHeaders>> = [
   {
     Header: 'Nome',
     accessor: 'name',

@@ -10,14 +10,14 @@ import {
   TableCell,
   TableRow,
 } from './styles';
-import type { TableProps } from './types';
+import type { TableHeaders, TableProps } from './types';
 
 function Table({ tableColumns, tableData }: TableProps) {
   const columns = useMemo(() => tableColumns, [tableColumns]);
 
   const data = useMemo(() => tableData, [tableData]);
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable<TableHeaders>({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;

@@ -2,9 +2,16 @@ import { Column } from 'react-table';
 
 import { Student } from '@graphql/types/generated';
 
-interface TableProps {
-  tableColumns: Array<Column<any>>;
-  tableData: Array<Student>;
+interface TableActionHeaders {
+  edit: JSX.Element;
+  delete: JSX.Element;
 }
 
-export type { TableProps };
+type TableHeaders = Student & TableActionHeaders;
+
+interface TableProps {
+  tableColumns: Array<Column<TableHeaders>>;
+  tableData: Array<TableHeaders>;
+}
+
+export type { TableProps, TableHeaders };
