@@ -14,6 +14,8 @@ const ADD_STUDENT = gql`
   mutation AddStudent($name: String!, $cpf: String!, $email: String!) {
     addStudent(name: $name, cpf: $cpf, email: $email) {
       name
+      email
+      cpf
     }
   }
 `;

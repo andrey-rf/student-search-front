@@ -30,7 +30,7 @@ import {
   MutationUpdateStudentArgs,
   Student,
   MutationDeleteStudentArgs,
-  useAllStudentsLazyQuery,
+  AllStudentsQuery,
 } from '@graphql/types/generated';
 import { TableHeaders } from '@components/Table/types';
 
@@ -48,13 +48,28 @@ function Main() {
   const [addStudent, { loading: addLoading, error: addError }] = useMutation<
     Student,
     MutationAddStudentArgs
-  >(ADD_STUDENT);
+  >(ADD_STUDENT, {
+    update: (cache, mutationResult) => {
+      const newStudent = mutationResult.data;
+      const data = cache.readQuery<AllStudentsQuery>({
+        query: LIST_STUDENTS,
+      });
+      cache.writeQuery({
+        query: LIST_STUDENTS,
+        data: { listStudents: [...(data?.listStudents ?? []), newStudent] },
+      });
+    },
+  });
 
   const [updateStudent, { loading: updateLoading, error: updateError }] =
-    useMutation<Student, MutationUpdateStudentArgs>(UPDATE_STUDENT);
+    useMutation<Student, MutationUpdateStudentArgs>(UPDATE_STUDENT, {
+      refetchQueries: [LIST_STUDENTS, 'listStudents'],
+    });
 
   const [deleteStudent, { loading: deleteLoading, error: deleteError }] =
-    useMutation<Student, MutationDeleteStudentArgs>(DELETE_STUDENT);
+    useMutation<Student, MutationDeleteStudentArgs>(DELETE_STUDENT, {
+      refetchQueries: [LIST_STUDENTS, 'listStudents'],
+    });
 
   const handleAdd = (data: FormData) => {
     addStudent({
