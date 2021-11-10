@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Desafio Técnico Descomplica - Andrey Fontoura
 
-## Getting Started
+Projeto de interface de consulta de alunos utilizando NextJS + Typescript, consumindo uma API em GarphQL.
 
-First, run the development server:
+## Instruções para uso
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Docker
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Caso faça uso do Docker, é possível rodar a aplicação utilizando o comando `docker-compose up` na pasta raiz do projeto. Sua aplicação será executada e servida através da porta `3000`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Local
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Se preferir rodar a aplicação localmente, é possível utilizar o comando `yarn dev` para executar a versão de desenvolvimento, ou `yarn build` e `yarn start` para construir o bundle de produção e servir através dele.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Variáveis de ambiente
 
-## Learn More
+#### API_URL
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+É recomendado que se configure essa variável num arquivo `.env` com o endereço da API GraphQL. Com a [API](https://github.com/andrey-rf/student-search-api) em execução, este endereço é `http://localhost:4000`.

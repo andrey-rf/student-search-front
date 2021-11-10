@@ -2,9 +2,15 @@ FROM node:latest
 
 WORKDIR /app
 
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn
+
 COPY . .
-RUN npm install
+
+RUN yarn build
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
