@@ -30,16 +30,28 @@ import Image from 'next/image';
 
 import alert from '@assets/alert.svg';
 
+type Modal = 'add' | 'update' | 'delete' | '';
+
 function Main() {
-  const [dialogOpen, setDialogOpen] = useState<
-    'add' | 'update' | 'delete' | ''
-  >('');
+  const [dialogOpen, setDialogOpen] = useState<Modal>('');
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
   const [searchValue, setSearchValue] = useState<string>('');
   const [studentList, setStudentList] = useState<Array<Student>>([]);
 
   const closeModal = () => {
+    const body = document.querySelector('body');
+    if (body) {
+      body.style.overflow = 'auto';
+    }
     setDialogOpen('');
+  };
+
+  const openModal = (modal: Modal) => {
+    const body = document.querySelector('body');
+    if (body) {
+      body.style.overflow = 'hidden';
+    }
+    setDialogOpen(modal);
   };
 
   const { addStudentResult, updateStudentResult, deleteStudentResult } =
@@ -112,7 +124,7 @@ function Main() {
         <SecondaryButton
           type="button"
           onClick={() => {
-            setDialogOpen('update');
+            openModal('update');
             setEditingStudent(original);
           }}
         >
@@ -127,7 +139,7 @@ function Main() {
         <OutlinedDangerButton
           type="button"
           onClick={() => {
-            setDialogOpen('delete');
+            openModal('delete');
             setEditingStudent(original);
           }}
         >
@@ -149,7 +161,7 @@ function Main() {
         />
         <PrimaryButton
           type="button"
-          onClick={() => setDialogOpen('add')}
+          onClick={() => openModal('add')}
           fontSize={1}
         >
           + Adicionar aluno
