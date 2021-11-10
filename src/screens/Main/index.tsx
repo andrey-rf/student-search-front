@@ -167,7 +167,7 @@ function Main() {
           + Adicionar aluno
         </PrimaryButton>
       </FlexBox>
-      {error && <span>Ocorreu um erro...</span>}
+      {error && <h3>Ocorreu um erro :(</h3>}
       {!error && studentList.length > 0 && (
         <Table
           tableColumns={COLUMNS_WITH_ACTIONS}
@@ -175,7 +175,7 @@ function Main() {
           loading={loading}
         />
       )}
-      {!(studentList.length > 0) && (
+      {!error && !(studentList.length > 0) && (
         <FlexBox justify="center" marginTop={2}>
           <h3>Nenhum estudante encontrado :(</h3>
         </FlexBox>
