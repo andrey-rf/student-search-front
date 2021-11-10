@@ -1,13 +1,15 @@
-FROM node:latest
+FROM node:alpine
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app
 
-COPY package.json ./
-COPY yarn.lock ./
+WORKDIR /usr/src/app
 
-RUN yarn
+COPY package.json /usr/src/app
+COPY yarn.lock /usr/src/app
 
-COPY . .
+RUN yarn install
+
+COPY . /usr/src/app
 
 RUN yarn build
 

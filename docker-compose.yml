@@ -3,7 +3,8 @@ version: '3'
 services:
   projeto-alunos-front:
     build:
-      context: .
+      context: ./
+      dockerfile: Dockerfile
     ports:
       - '3000:3000'
     volumes:
