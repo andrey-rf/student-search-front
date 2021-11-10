@@ -2,8 +2,7 @@ import { Input as RawInput } from 'reakit';
 import styled from 'styled-components';
 
 const Form = styled.form`
-  width: 60%;
-  margin: 0 auto 2rem;
+  width: 70%;
 `;
 
 const Input = styled(RawInput)`

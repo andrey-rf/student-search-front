@@ -114,7 +114,6 @@ function Main() {
       Cell: ({ row: { original } }) => (
         <SecondaryButton
           type="button"
-          alignSelf="flex-end"
           onClick={() => {
             setDialogOpen('update');
             setEditingStudent(original);
@@ -130,7 +129,6 @@ function Main() {
       Cell: ({ row: { original } }) => (
         <OutlinedDangerButton
           type="button"
-          alignSelf="flex-end"
           onClick={() => {
             setDialogOpen('delete');
             setEditingStudent(original);
@@ -143,21 +141,23 @@ function Main() {
   ];
 
   return (
-    <FlexBox direction="column">
-      <Search
-        id="search"
-        label="Busca por nome, email ou CPF"
-        placeholder="Digite um nome, email ou CPF..."
-        value={searchValue}
-        handleChange={handleSearch}
-      />
-      <PrimaryButton
-        type="button"
-        alignSelf="flex-end"
-        onClick={() => setDialogOpen('add')}
-      >
-        Adicionar aluno
-      </PrimaryButton>
+    <>
+      <FlexBox justify="space-between" align="center">
+        <Search
+          id="search"
+          label="Busca por nome, email ou CPF"
+          placeholder="Digite um nome, email ou CPF..."
+          value={searchValue}
+          handleChange={handleSearch}
+        />
+        <PrimaryButton
+          type="button"
+          onClick={() => setDialogOpen('add')}
+          fontSize={1}
+        >
+          + Adicionar aluno
+        </PrimaryButton>
+      </FlexBox>
       {loading && <span>Loading...</span>}
       {!loading && error && <span>Ocorreu um erro...</span>}
       {!loading &&
@@ -201,7 +201,7 @@ function Main() {
           </FlexBox>
         </Modal>
       )}
-    </FlexBox>
+    </>
   );
 }
 

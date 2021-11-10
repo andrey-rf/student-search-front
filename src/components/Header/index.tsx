@@ -12,7 +12,6 @@ const StyledHeader = styled.header`
   width: 100%;
   padding: 32px 0;
   background: ${({ theme }) => theme.colors.green.primary};
-  margin-bottom: 3rem;
 
   h1 {
     margin: 0;

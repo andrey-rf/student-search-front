@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 const TableContainer = styled.table`
-  margin: 0 auto;
+  margin: 2rem auto;
   border-collapse: collapse;
   overflow: hidden;
-  margin-top: 16px;
   font-size: 1.25rem;
   border-radius: 1rem;
   width: 100%;

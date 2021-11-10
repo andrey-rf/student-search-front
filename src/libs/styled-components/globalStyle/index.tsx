@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     max-width: 1100px;
     width: 100%;
     height: 100%;
+    padding: 3.5rem 0 5rem;
   }
 
   a {
