@@ -7,7 +7,8 @@
     "start": "next start",
     "lint": "eslint --config ./.eslintrc.js --fix \"./src/**/*.{ts,tsx}\"",
     "prettier": "prettier --write ./src",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "test": "jest --maxWorkers=50%"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
@@ -25,16 +26,21 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@apollo/react-testing": "^4.0.0",
     "@graphql-codegen/add": "^3.1.0",
     "@graphql-codegen/cli": "^2.2.2",
     "@graphql-codegen/typescript-operations": "^2.2.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.1",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
     "@types/node": "16.11.6",
     "@types/react": "17.0.34",
     "@types/react-table": "^7.7.7",
     "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
+    "apollo-boost": "^0.4.9",
+    "babel-jest": "^27.3.1",
     "babel-plugin-styled-components": "^1.13.3",
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -46,7 +52,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.3.1",
     "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
     "typescript": "4.4.4"
   }
 }

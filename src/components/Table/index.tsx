@@ -34,7 +34,7 @@ function Table({ tableColumns, tableData, loading }: TableProps) {
     tableInstance;
 
   return (
-    <TableContainer {...getTableProps()}>
+    <TableContainer {...getTableProps()} data-testid="students-table">
       <TableHeader>
         {headerGroups.map(headerGroup => (
           // eslint-disable-next-line react/jsx-key
@@ -49,12 +49,12 @@ function Table({ tableColumns, tableData, loading }: TableProps) {
         ))}
       </TableHeader>
       <TableBody {...getTableBodyProps()}>
-        {rows.map(row => {
+        {rows.map((row, index) => {
           prepareRow(row);
 
           return (
             // eslint-disable-next-line react/jsx-key
-            <TableRow {...row.getRowProps()}>
+            <TableRow {...row.getRowProps()} data-testid={`table-row-${index}`}>
               {row.cells.map(cell => (
                 // eslint-disable-next-line react/jsx-key
                 <TableCell {...cell.getCellProps()}>
