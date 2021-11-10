@@ -1,5 +1,6 @@
 import { TableHeaders } from '@components/Table/types';
 import { Column } from 'react-table';
+import { formatCpf } from './inputMask';
 
 const COLUMNS: Array<Column<TableHeaders>> = [
   {
@@ -9,6 +10,7 @@ const COLUMNS: Array<Column<TableHeaders>> = [
   {
     Header: 'CPF',
     accessor: 'cpf',
+    Cell: ({ value }) => formatCpf(value),
   },
   {
     Header: 'Email',
