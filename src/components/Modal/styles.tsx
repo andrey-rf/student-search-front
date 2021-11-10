@@ -22,6 +22,15 @@ const Dialog = styled.div`
   min-height: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 1250px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const CloseButton = styled(Button)`

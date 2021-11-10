@@ -22,7 +22,7 @@ const Input = styled(RawInput)`
   border-radius: 0.5rem;
   padding: 1rem 1.5rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1em;
   border: 1px solid ${props => props.theme.colors.gray.primary};
 `;
 

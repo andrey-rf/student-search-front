@@ -8,7 +8,11 @@ const BaseButton = styled(Button)<ButtonProps>`
   border-radius: 0.75rem;
   font-weight: 600;
   align-self: ${props => props.alignSelf || 'normal'};
-  font-size: ${props => `${props.fontSize}rem` || '0.9rem'};
+  font-size: ${props => `${props.fontSize || '0.9'}rem`};
+
+  @media (max-width: 1250px) {
+    font-size: 1.2rem;
+  } ;
 `;
 
 const PrimaryButton = styled(BaseButton)`
