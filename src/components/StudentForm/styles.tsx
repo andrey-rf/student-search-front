@@ -24,6 +24,21 @@ const Input = styled(RawInput)`
   width: 100%;
   font-size: 1em;
   border: 1px solid ${props => props.theme.colors.gray.primary};
+  outline: none;
+
+  &.error {
+    border: 1px solid ${props => props.theme.colors.red.primary};
+  }
 `;
 
-export { Form, SaveButton, Input };
+const Label = styled.label`
+  font-size: 0.8em;
+  color: ${props => props.theme.colors.red.primary};
+  visibility: hidden;
+
+  &.error {
+    visibility: visible;
+  }
+`;
+
+export { Form, SaveButton, Input, Label };

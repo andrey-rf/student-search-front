@@ -18,7 +18,7 @@ const Dialog = styled.div`
   padding: 3rem;
   border-radius: 1rem;
   position: relative;
-  min-width: 20%;
+  min-width: 25%;
   min-height: 30%;
   display: flex;
   flex-direction: column;
