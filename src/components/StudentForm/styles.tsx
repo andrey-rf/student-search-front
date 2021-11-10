@@ -7,7 +7,10 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  min-height: 100%;
 `;
 
 const SaveButton = styled(PrimaryButton)`
@@ -16,7 +19,9 @@ const SaveButton = styled(PrimaryButton)`
 
 const Input = styled(RawInput)`
   border-radius: 0.5rem;
-  padding: 0.5rem 1.5rem;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  font-size: 1rem;
   border: 1px solid ${props => props.theme.colors.gray.primary};
 `;
 

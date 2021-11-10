@@ -14,7 +14,7 @@ import {
 } from '@graphql/types/generated';
 import { toast } from 'react-toastify';
 
-function useGraphQL() {
+function useGraphQL(closeModal: () => void) {
   const addStudentResult = useMutation<Student, MutationAddStudentArgs>(
     ADD_STUDENT,
     {
@@ -23,6 +23,7 @@ function useGraphQL() {
       },
       onCompleted: () => {
         toast.success('Estudante adicionado com sucesso');
+        closeModal();
       },
       update: (cache, mutationResult) => {
         const newStudent = mutationResult.data;
@@ -45,6 +46,7 @@ function useGraphQL() {
       },
       onCompleted: () => {
         toast.success('Estudante editado com sucesso');
+        closeModal();
       },
       refetchQueries: [LIST_STUDENTS, 'listStudents'],
     },
@@ -58,6 +60,7 @@ function useGraphQL() {
       },
       onCompleted: () => {
         toast.success('Estudante excluído com sucesso');
+        closeModal();
       },
       refetchQueries: [LIST_STUDENTS, 'listStudents'],
     },

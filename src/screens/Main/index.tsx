@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { Column } from 'react-table';
 
 import { COLUMNS } from '@helpers/constants';
@@ -8,6 +8,7 @@ import { COLUMNS } from '@helpers/constants';
 import { FlexBox } from '@components/Box';
 import {
   DangerButton,
+  OutlinedDangerButton,
   PrimaryButton,
   SecondaryButton,
 } from '@components/Button';
@@ -25,17 +26,24 @@ import { TableHeaders } from '@components/Table/types';
 import { useGraphQL } from '@hooks/useGraphQL';
 import Loader from 'react-loader-spinner';
 import { onlyNumbers } from '@helpers/inputMask';
+import Image from 'next/image';
+
+import alert from '@assets/alert.svg';
 
 function Main() {
-  const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
-  const [updateDialogOpen, setUpdateDialogOpen] = useState<boolean>(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
+  const [dialogOpen, setDialogOpen] = useState<
+    'add' | 'update' | 'delete' | ''
+  >('');
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
   const [searchValue, setSearchValue] = useState<string>('');
   const [studentList, setStudentList] = useState<Array<Student>>([]);
 
+  const closeModal = () => {
+    setDialogOpen('');
+  };
+
   const { addStudentResult, updateStudentResult, deleteStudentResult } =
-    useGraphQL();
+    useGraphQL(closeModal);
 
   const [getStudents, { loading, error, data: queryData }] =
     useLazyQuery<AllStudentsQuery>(LIST_STUDENTS, {
@@ -61,10 +69,6 @@ function Main() {
         cpf: onlyNumbers(data.cpf),
         email: data.email,
       },
-    }).then(() => {
-      if (!addError) {
-        setAddDialogOpen(false);
-      }
     });
 
   const handleUpdate = (data: FormData) =>
@@ -74,10 +78,6 @@ function Main() {
         cpf: onlyNumbers(data.cpf),
         email: data.email,
       },
-    }).then(() => {
-      if (!updateError) {
-        setUpdateDialogOpen(false);
-      }
     });
 
   const handleDelete = (cpf: string) =>
@@ -85,10 +85,6 @@ function Main() {
       variables: {
         cpf,
       },
-    }).then(() => {
-      if (!deleteError) {
-        setDeleteDialogOpen(false);
-      }
     });
 
   const handleSearch = (value: string) => {
@@ -120,7 +116,7 @@ function Main() {
           type="button"
           alignSelf="flex-end"
           onClick={() => {
-            setUpdateDialogOpen(true);
+            setDialogOpen('update');
             setEditingStudent(original);
           }}
         >
@@ -132,16 +128,16 @@ function Main() {
       id: 'delete',
       accessor: 'delete',
       Cell: ({ row: { original } }) => (
-        <DangerButton
+        <OutlinedDangerButton
           type="button"
           alignSelf="flex-end"
           onClick={() => {
-            setDeleteDialogOpen(true);
+            setDialogOpen('delete');
             setEditingStudent(original);
           }}
         >
           Excluir aluno
-        </DangerButton>
+        </OutlinedDangerButton>
       ),
     },
   ];
@@ -158,7 +154,7 @@ function Main() {
       <PrimaryButton
         type="button"
         alignSelf="flex-end"
-        onClick={() => setAddDialogOpen(true)}
+        onClick={() => setDialogOpen('add')}
       >
         Adicionar aluno
       </PrimaryButton>
@@ -171,13 +167,13 @@ function Main() {
         ) : (
           <span>Nenhum estudante adicionado</span>
         ))}
-      {addDialogOpen && (
-        <Modal setModalOpen={setAddDialogOpen}>
+      {dialogOpen === 'add' && (
+        <Modal closeModal={closeModal}>
           <StudentForm onSubmit={handleAdd} loading={addLoading} />
         </Modal>
       )}
-      {updateDialogOpen && editingStudent && (
-        <Modal setModalOpen={setUpdateDialogOpen}>
+      {dialogOpen === 'update' && editingStudent && (
+        <Modal closeModal={closeModal}>
           <StudentForm
             onSubmit={handleUpdate}
             loading={updateLoading}
@@ -185,12 +181,13 @@ function Main() {
           />
         </Modal>
       )}
-      {deleteDialogOpen && editingStudent && (
-        <Modal setModalOpen={setDeleteDialogOpen}>
-          <FlexBox direction="column" gap={2}>
+      {dialogOpen === 'delete' && editingStudent && (
+        <Modal closeModal={closeModal}>
+          <FlexBox direction="column" gap={2} align="center">
             {!deleteLoading ? (
               <>
                 <h3>Tem certeza que deseja excluir {editingStudent.name}?</h3>
+                <Image src={alert} width={96} height={96} />
                 <DangerButton
                   alignSelf="center"
                   onClick={() => handleDelete(editingStudent.cpf)}

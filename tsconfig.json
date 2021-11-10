@@ -21,7 +21,8 @@
       "@pages/*": ["pages/*"],
       "@libs/*": ["libs/*"],
       "@graphql/*": ["graphql/*"],
-      "@helpers/*": ["helpers/*"]
+      "@helpers/*": ["helpers/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

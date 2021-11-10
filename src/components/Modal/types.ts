@@ -1,7 +1,7 @@
-import { Dispatch, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 interface ModalProps {
-  setModalOpen: Dispatch<boolean>;
+  closeModal: () => void;
   children?: ReactNode;
 }
 

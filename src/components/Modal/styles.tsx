@@ -15,15 +15,18 @@ const DialogBackdrop = styled.div`
 const Dialog = styled.div`
   margin: auto;
   background-color: white;
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 1rem;
   position: relative;
+  min-width: 20%;
+  min-height: 30%;
 `;
 
 const CloseButton = styled(Button)`
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1rem;
 `;
 
 export { DialogBackdrop, Dialog, CloseButton };
