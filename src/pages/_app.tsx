@@ -2,12 +2,13 @@ import { ApolloProvider } from '@apollo/client';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 import { Provider } from 'reakit';
 
 import { createApolloClient } from '@libs/apollo-graphql/apolloClient';
 import DefaultTheme from '@libs/styled-components/defaultTheme';
 import { GlobalStyle } from '@libs/styled-components/globalStyle';
-import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 

@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import Image from 'next/image';
+import styled from 'styled-components';
+
 import { FlexBox } from '@components/Box';
 
 const HeaderBox = styled(FlexBox)`
@@ -59,10 +60,20 @@ function Header() {
     <StyledHeader>
       <HeaderBox justify="center" align="center">
         <ImageContainer>
-          <Image src="/logo-nao-complica.png" height={64} width={188} />
+          <Image
+            src="/logo-nao-complica.png"
+            alt="Logo do não complica, escrito por extenso"
+            height={64}
+            width={188}
+          />
         </ImageContainer>
         <ImageContainerSmall>
-          <Image src="/logo-nao-complica-small.png" height={64} width={55} />
+          <Image
+            src="/logo-nao-complica-small.png"
+            alt="Logo do não complica, abreviado com a letra n"
+            height={64}
+            width={55}
+          />
         </ImageContainerSmall>
         <h1>Gerenciamento de Alunos</h1>
       </HeaderBox>

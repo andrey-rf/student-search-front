@@ -1,14 +1,15 @@
 import { memo, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
+import Loader from 'react-loader-spinner';
+
+import { formatCpf } from '@helpers/inputMask';
 
 import { Form, SaveButton, Input } from './styles';
 import type { FormProps, FormData } from './types';
-import { formatCpf } from '@helpers/inputMask';
-import Loader from 'react-loader-spinner';
 
 function StudentForm({ onSubmit, value, loading }: FormProps) {
-  const { register, handleSubmit, setValue } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
   const [cpf, setCpf] = useState<string>(value?.cpf ?? '');
 
   return (

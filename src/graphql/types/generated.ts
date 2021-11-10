@@ -1,10 +1,16 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -21,18 +27,15 @@ export type Mutation = {
   updateStudent: Student;
 };
 
-
 export type MutationAddStudentArgs = {
   cpf: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
 };
 
-
 export type MutationDeleteStudentArgs = {
   cpf: Scalars['String'];
 };
-
 
 export type MutationUpdateStudentArgs = {
   cpf: Scalars['String'];
@@ -46,11 +49,9 @@ export type Query = {
   listStudents: Array<Student>;
 };
 
-
 export type QueryGetStudentArgs = {
   cpf: Scalars['String'];
 };
-
 
 export type QueryListStudentsArgs = {
   text?: Maybe<Scalars['String']>;
@@ -63,21 +64,27 @@ export type Student = {
   name: Scalars['String'];
 };
 
-export type AllStudentsQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllStudentsQueryVariables = Exact<{ [key: string]: never }>;
 
-
-export type AllStudentsQuery = { __typename?: 'Query', listStudents: Array<{ __typename?: 'Student', name: string, cpf: string, email: string }> };
-
+export type AllStudentsQuery = {
+  __typename?: 'Query';
+  listStudents: Array<{
+    __typename?: 'Student';
+    name: string;
+    cpf: string;
+    email: string;
+  }>;
+};
 
 export const AllStudentsDocument = gql`
-    query allStudents {
-  listStudents {
-    name
-    cpf
-    email
+  query allStudents {
+    listStudents {
+      name
+      cpf
+      email
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useAllStudentsQuery__
@@ -94,14 +101,35 @@ export const AllStudentsDocument = gql`
  *   },
  * });
  */
-export function useAllStudentsQuery(baseOptions?: Apollo.QueryHookOptions<AllStudentsQuery, AllStudentsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllStudentsQuery, AllStudentsQueryVariables>(AllStudentsDocument, options);
-      }
-export function useAllStudentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllStudentsQuery, AllStudentsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllStudentsQuery, AllStudentsQueryVariables>(AllStudentsDocument, options);
-        }
+export function useAllStudentsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    AllStudentsQuery,
+    AllStudentsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AllStudentsQuery, AllStudentsQueryVariables>(
+    AllStudentsDocument,
+    options,
+  );
+}
+export function useAllStudentsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AllStudentsQuery,
+    AllStudentsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<AllStudentsQuery, AllStudentsQueryVariables>(
+    AllStudentsDocument,
+    options,
+  );
+}
 export type AllStudentsQueryHookResult = ReturnType<typeof useAllStudentsQuery>;
-export type AllStudentsLazyQueryHookResult = ReturnType<typeof useAllStudentsLazyQuery>;
-export type AllStudentsQueryResult = Apollo.QueryResult<AllStudentsQuery, AllStudentsQueryVariables>;
+export type AllStudentsLazyQueryHookResult = ReturnType<
+  typeof useAllStudentsLazyQuery
+>;
+export type AllStudentsQueryResult = Apollo.QueryResult<
+  AllStudentsQuery,
+  AllStudentsQueryVariables
+>;
