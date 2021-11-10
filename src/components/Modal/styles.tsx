@@ -2,7 +2,7 @@ import { Button } from 'reakit/Button';
 import styled from 'styled-components';
 
 const DialogBackdrop = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -20,6 +20,8 @@ const Dialog = styled.div`
   position: relative;
   min-width: 20%;
   min-height: 30%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CloseButton = styled(Button)`

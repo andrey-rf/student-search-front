@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import { PrimaryButton } from '@components/Button';
 
 const Form = styled.form`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 `;
 
 const SaveButton = styled(PrimaryButton)`
