@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FlexBox } from '@components/Box';
 
 const HeaderBox = styled(FlexBox)`
+  font-family: Mohave, sans-serif;
   max-width: 1100px;
   position: relative;
   width: 100%;

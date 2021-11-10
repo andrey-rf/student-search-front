@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   html,
   body {
-    font-family: Mohave, -apple-system, sans-serif;
+    font-family: Montserrat, -apple-system, sans-serif;
   }
 
   main {

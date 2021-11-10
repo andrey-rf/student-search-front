@@ -51,6 +51,11 @@ class DocumentPage extends Document {
             href="https://fonts.googleapis.com/css2?family=Mohave:wght@400;600;700&display=swap"
             rel="stylesheet"
           />
+
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body>
           <Main />
