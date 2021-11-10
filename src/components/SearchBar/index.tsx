@@ -16,6 +16,7 @@ function Search(props: SearchProps) {
         value={value}
         onChange={e => handleChange(e.target.value)}
         placeholder={placeholder}
+        aria-label="Pesquisa por nome, CPF ou email"
       />
     </Form>
   );

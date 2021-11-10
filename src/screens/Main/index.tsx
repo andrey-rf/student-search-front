@@ -123,6 +123,7 @@ function Main() {
       Cell: ({ row: { original } }) => (
         <SecondaryButton
           type="button"
+          aria-label={`Editar ${original.name}`}
           onClick={() => {
             openModal('update');
             setEditingStudent(original);
@@ -137,6 +138,7 @@ function Main() {
       accessor: 'delete',
       Cell: ({ row: { original } }) => (
         <OutlinedDangerButton
+          aria-label={`Excluir ${original.name}`}
           type="button"
           onClick={() => {
             openModal('delete');
@@ -154,13 +156,14 @@ function Main() {
       <FlexBox justify="space-between" align="center">
         <Search
           id="search"
-          label="Busca por nome, email ou CPF"
+          label="Pesquisa"
           placeholder="Digite um nome, email ou CPF..."
           value={searchValue}
           handleChange={handleSearch}
         />
         <PrimaryButton
           type="button"
+          aria-label="Adicionar aluno"
           onClick={() => openModal('add')}
           fontSize={1}
         >
@@ -203,6 +206,7 @@ function Main() {
                 <Image src={alert} width={96} height={96} />
                 <DangerButton
                   alignSelf="center"
+                  aria-label={`Confirmar exclusão de ${editingStudent.name}`}
                   onClick={() => handleDelete(editingStudent.cpf)}
                 >
                   Confirmar

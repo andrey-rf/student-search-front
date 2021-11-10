@@ -20,12 +20,14 @@ function StudentForm({ onSubmit, value, loading }: FormProps) {
           <Input
             defaultValue={value?.name}
             placeholder="Nome"
+            aria-label="Nome"
             {...register('name')}
           />
           <Input
             defaultValue={value?.cpf}
             inputMode="numeric"
             placeholder="CPF"
+            aria-label="CPF"
             value={formatCpf(cpf)}
             {...register('cpf')}
             onChange={e => setCpf(e.target.value)}
@@ -33,10 +35,13 @@ function StudentForm({ onSubmit, value, loading }: FormProps) {
           <Input
             defaultValue={value?.email}
             placeholder="Email"
+            aria-label="Email"
             {...register('email')}
           />
 
-          <SaveButton type="submit">Salvar</SaveButton>
+          <SaveButton aria-label="Salvar alterações" type="submit">
+            Salvar
+          </SaveButton>
         </>
       ) : (
         <Loader type="TailSpin" color="#CCC" height={40} width={40} />

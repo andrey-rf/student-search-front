@@ -9,7 +9,9 @@ function Modal({ children, closeModal }: ModalProps) {
           tabIndex={0}
           aria-label="Pop-up para controle de dados de estudantes"
         >
-          <CloseButton onClick={closeModal}>X</CloseButton>
+          <CloseButton aria-label="Fechar pop-up" onClick={closeModal}>
+            X
+          </CloseButton>
           {children}
         </Dialog>
       </DialogBackdrop>
