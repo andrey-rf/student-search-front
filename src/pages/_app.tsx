@@ -9,6 +9,7 @@ import DefaultTheme from '@libs/styled-components/defaultTheme';
 import { GlobalStyle } from '@libs/styled-components/globalStyle';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface ApplicationProps extends AppProps {
   api: string;

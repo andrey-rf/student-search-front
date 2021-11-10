@@ -155,15 +155,19 @@ function Main() {
           + Adicionar aluno
         </PrimaryButton>
       </FlexBox>
-      {loading && <span>Loading...</span>}
-      {!loading && error && <span>Ocorreu um erro...</span>}
-      {!loading &&
-        !error &&
-        (studentList.length > 0 ? (
-          <Table tableColumns={COLUMNS_WITH_ACTIONS} tableData={studentList} />
-        ) : (
-          <span>Nenhum estudante adicionado</span>
-        ))}
+      {error && <span>Ocorreu um erro...</span>}
+      {!error && studentList.length > 0 && (
+        <Table
+          tableColumns={COLUMNS_WITH_ACTIONS}
+          tableData={studentList}
+          loading={loading}
+        />
+      )}
+      {!(studentList.length > 0) && (
+        <FlexBox justify="center" marginTop={2}>
+          <h3>Nenhum estudante encontrado :(</h3>
+        </FlexBox>
+      )}
       {dialogOpen === 'add' && (
         <Modal closeModal={closeModal}>
           <StudentForm onSubmit={handleAdd} loading={addLoading} />

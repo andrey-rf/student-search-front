@@ -8,11 +8,15 @@ type Justify =
   | 'space-evenly'
   | 'center';
 
-interface FlexBoxProps {
+interface BoxProps {
+  marginTop?: number;
+}
+
+interface FlexBoxProps extends BoxProps {
   direction?: Direction;
   align?: Align;
   justify?: Justify;
   gap?: number;
 }
 
-export type { FlexBoxProps };
+export type { FlexBoxProps, BoxProps };

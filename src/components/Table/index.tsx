@@ -11,11 +11,22 @@ import {
   TableRow,
 } from './styles';
 import type { TableHeaders, TableProps } from './types';
+import Skeleton from 'react-loading-skeleton';
+import { FlexBox } from '@components/Box';
 
-function Table({ tableColumns, tableData }: TableProps) {
-  const columns = useMemo(() => tableColumns, [tableColumns]);
+function Table({ tableColumns, tableData, loading }: TableProps) {
+  const columns = useMemo(
+    () =>
+      !loading && tableData.length > 0
+        ? tableColumns
+        : tableColumns.map(column => ({ ...column, Cell: <Skeleton /> })),
+    [tableColumns],
+  );
 
-  const data = useMemo(() => tableData, [tableData]);
+  const data = useMemo(
+    () => (!loading && tableData.length > 0 ? tableData : Array(5).fill({})),
+    [tableData],
+  );
 
   const tableInstance = useTable<TableHeaders>({ columns, data });
 

@@ -12,6 +12,7 @@ type TableHeaders = Student & TableActionHeaders;
 interface TableProps {
   tableColumns: Array<Column<TableHeaders>>;
   tableData: Array<Student>;
+  loading: boolean;
 }
 
 export type { TableProps, TableHeaders };
