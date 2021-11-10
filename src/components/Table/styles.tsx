@@ -17,6 +17,10 @@ const TableHeader = styled.thead`
 const HeaderCell = styled.th`
   padding: 1.5rem 2.5rem;
   border-bottom: 2px solid white;
+
+  @media (max-width: 1250px) {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 const TableBody = styled.tbody``;
@@ -24,6 +28,10 @@ const TableBody = styled.tbody``;
 const TableCell = styled.td`
   padding: 1.5rem 2rem;
   text-align: center;
+
+  @media (max-width: 1250px) {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 const TableRow = styled.tr`
