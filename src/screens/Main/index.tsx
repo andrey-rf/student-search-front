@@ -53,14 +53,11 @@ function Main() {
     });
   const searchStudents = useDebounce(getStudents, 500);
 
-  const [addStudent, { loading: addLoading, error: addError }] =
-    addStudentResult;
+  const [addStudent, { loading: addLoading }] = addStudentResult;
 
-  const [updateStudent, { loading: updateLoading, error: updateError }] =
-    updateStudentResult;
+  const [updateStudent, { loading: updateLoading }] = updateStudentResult;
 
-  const [deleteStudent, { loading: deleteLoading, error: deleteError }] =
-    deleteStudentResult;
+  const [deleteStudent, { loading: deleteLoading }] = deleteStudentResult;
 
   const handleAdd = (data: FormData) =>
     addStudent({
